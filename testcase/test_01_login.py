@@ -6,6 +6,7 @@ from public.apimethod import Apimethod
 from public.get_testdata import ReadExcel
 
 def test_login():
+    """登录"""
     filepath_config = 'C:/Users/cmf/Desktop/test1/config/config.xlsx'
     config_sheetname = 'login'
     config_data = Excel_data(filepath_config,config_sheetname).get_excel_data()
