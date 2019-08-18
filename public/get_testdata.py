@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
-import xlrd,os
-import pandas as pd
+import xlrd
+# import pandas as pd
 
 class ReadExcel(object):
     def __init__(self,excelpath,sheetname):

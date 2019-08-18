@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import xlrd
-import pandas as pd
+import os
+# import pandas as pd
 
 class Excel_data(object):
     def __init__(self,excelpath,sheetname):
@@ -18,15 +19,16 @@ class Excel_data(object):
                 data = self.table.cell_value(i,j)
                 excel_dict[self.keys[j]] = data
             fileinfo.append(excel_dict)
-        print(fileinfo)
+        # print(fileinfo)
         return fileinfo
 
         # print(fileinfo[0]['host'])
-if __name__ == '__main__':
-    excelpath = 'D:/appinstall/python3/test1/config/config.xlsx'
-    sheetname = 'login'
-    get_data = Excel_data(excelpath,sheetname)
-    datas = get_data.get_excel_data()
+# if __name__ == '__main__':
+#     filepath_now = os.path.abspath(os.path.join(os.getcwd(), '..'))
+#     excelpath = filepath_now +'/config/config.xlsx'
+#     sheetname = 'urlconfig'
+#     get_data = Excel_data(excelpath,sheetname)
+#     datas = get_data.get_excel_data()
 
 
 # class Excel_data(object):
