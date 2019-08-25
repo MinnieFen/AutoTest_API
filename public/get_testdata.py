@@ -10,7 +10,7 @@ class ReadExcel(object):
         self.rowNum = self.table.nrows
         self.colNum = self.table.ncols
 
-    def readexceldata(self):
+    def read_excel_data(self):
         file_list = []
         for i in range(1,self.rowNum):
             data_dict = {}
