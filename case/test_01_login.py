@@ -19,7 +19,7 @@ class Logintest(unittest.TestCase):
         self.login_sheetname = 'logindata'
         self.params = ReadExcel(self.datapath_login,self.login_sheetname).readexceldata()
 
-    def test_login_01(self):
+    def login_01(self):
         '''登录成功'''
         paramsdata1 = self.params[0]
         r = Apimethod(self.url,self.method,paramsdata1)

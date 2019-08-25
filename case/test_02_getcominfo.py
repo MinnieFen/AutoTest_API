@@ -4,6 +4,3 @@ from public.get_testdata import ReadExcel
 from public.apimethod import Apimethod
 import unittest
 import os
-
-class Getcominfo(unittest.TestCase):
-    def setUp(self):
