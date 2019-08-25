@@ -33,17 +33,17 @@ class Logintest(unittest.TestCase):
         with open(yamlpath,'w',encoding="utf-8") as f:
             yaml.dump(scodevalue,f,Dumper=yaml.RoundTripDumper)
 
-    def test_login_02(self):
-        '''登录失败'''
-        paramsdata2 = self.params[1]
-        r = Apimethod(self.url,self.method,paramsdata2)
-        req_result = r.apimethod()
-        self.assertEqual(req_result['error'],'PARAM_003')
-        # print(req_result)
+    # def test_login_02(self):
+    #     '''登录失败'''
+    #     paramsdata2 = self.params[1]
+    #     r = Apimethod(self.url,self.method,paramsdata2)
+    #     req_result = r.apimethod()
+    #     self.assertEqual(req_result['error'],'PARAM_003')
+    #     # print(req_result)
 
-if __name__ == '__main__':
-    if __name__ == '__main__':
-        unittest.main()
+# if __name__ == '__main__':
+#     if __name__ == '__main__':
+#         unittest.main()
 
 # def test_login():
 #     filepath_config = 'D:/appinstall/python3/test1/config/config.xlsx'
