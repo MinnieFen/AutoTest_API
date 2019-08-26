@@ -6,25 +6,26 @@ import unittest
 from ruamel import yaml
 import os
 
-class Logintest(unittest.TestCase):
+class TestLogin(unittest.TestCase):
     '''登录测试'''
     def setUp(self):
-        self.filepath_now = os.path.abspath(os.path.join(os.getcwd(),'..'))
+        self.filepath_now = os.path.abspath(os.path.join(os.getcwd()))
         self.filepath_config = self.filepath_now + '\config\config.xlsx'
+        # print(self.filepath_config)
         self.config_sheetname = 'urlconfig'
         self.config_data = Excel_data(self.filepath_config,self.config_sheetname).get_excel_data()
         self.url = self.config_data[0]['host'] + self.config_data[0]['url']
         self.method = self.config_data[0]['method']
         self.datapath_login = self.filepath_now + '\config\data_pwdlogin.xlsx'
         self.login_sheetname = 'logindata'
-        self.params = ReadExcel(self.datapath_login,self.login_sheetname).readexceldata()
+        self.params = ReadExcel(self.datapath_login,self.login_sheetname).read_excel_data()
 
-    def login_01(self):
+    def test_login_01(self):
         '''登录成功'''
         paramsdata1 = self.params[0]
         r = Apimethod(self.url,self.method,paramsdata1)
         req_result = r.apimethod()
-        print(req_result)
+        # print(req_result)
         self.assertEqual(req_result['error'],'0')
         # print(req_result['data']['scode'])
         '''获取scode并存储scode值'''
@@ -33,17 +34,20 @@ class Logintest(unittest.TestCase):
         with open(yamlpath,'w',encoding="utf-8") as f:
             yaml.dump(scodevalue,f,Dumper=yaml.RoundTripDumper)
 
-    # def test_login_02(self):
-    #     '''登录失败'''
-    #     paramsdata2 = self.params[1]
-    #     r = Apimethod(self.url,self.method,paramsdata2)
-    #     req_result = r.apimethod()
-    #     self.assertEqual(req_result['error'],'PARAM_003')
-    #     # print(req_result)
+    def test_login_02(self):
+        '''登录失败'''
+        paramsdata2 = self.params[1]
+        r = Apimethod(self.url,self.method,paramsdata2)
+        req_result = r.apimethod()
+        self.assertEqual(req_result['error'],'PARAM_003')
+        # print(req_result)
 
 # if __name__ == '__main__':
-#     if __name__ == '__main__':
-#         unittest.main()
+#     suite = unittest.TestSuite()
+#     suite.addTest(TestLogin("test_login_01"))
+#     unittest.TextTestRunner().run(suite)
+
+
 
 # def test_login():
 #     filepath_config = 'D:/appinstall/python3/test1/config/config.xlsx'
