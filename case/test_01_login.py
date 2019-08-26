@@ -9,14 +9,14 @@ import os
 class TestLogin(unittest.TestCase):
     '''登录测试'''
     def setUp(self):
-        self.filepath_now = os.path.abspath(os.path.join(os.getcwd()))
+        self.filepath_now = os.path.abspath(os.path.join(os.getcwd(),'..'))
         self.filepath_config = self.filepath_now + '\config\config.xlsx'
         # print(self.filepath_config)
         self.config_sheetname = 'urlconfig'
         self.config_data = Excel_data(self.filepath_config,self.config_sheetname).get_excel_data()
         self.url = self.config_data[0]['host'] + self.config_data[0]['url']
         self.method = self.config_data[0]['method']
-        self.datapath_login = self.filepath_now + '\config\data_pwdlogin.xlsx'
+        self.datapath_login = self.filepath_now + '\config\data_params.xlsx'
         self.login_sheetname = 'logindata'
         self.params = ReadExcel(self.datapath_login,self.login_sheetname).read_excel_data()
 
@@ -34,18 +34,18 @@ class TestLogin(unittest.TestCase):
         with open(yamlpath,'w',encoding="utf-8") as f:
             yaml.dump(scodevalue,f,Dumper=yaml.RoundTripDumper)
 
-    def test_login_02(self):
-        '''登录失败'''
-        paramsdata2 = self.params[1]
-        r = Apimethod(self.url,self.method,paramsdata2)
-        req_result = r.apimethod()
-        self.assertEqual(req_result['error'],'PARAM_003')
-        # print(req_result)
+    # def test_login_02(self):
+    #     '''登录失败'''
+    #     paramsdata2 = self.params[1]
+    #     r = Apimethod(self.url,self.method,paramsdata2)
+    #     req_result = r.apimethod()
+    #     self.assertEqual(req_result['error'],'PARAM_003')
+    #     # print(req_result)
 
-# if __name__ == '__main__':
-#     suite = unittest.TestSuite()
-#     suite.addTest(TestLogin("test_login_01"))
-#     unittest.TextTestRunner().run(suite)
+if __name__ == '__main__':
+    suite = unittest.TestSuite()
+    suite.addTest(TestLogin("test_login_01"))
+    unittest.TextTestRunner().run(suite)
 
 
 
