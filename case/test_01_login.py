@@ -9,7 +9,7 @@ import os
 class TestLogin(unittest.TestCase):
     '''登录测试'''
     def setUp(self):
-        self.filepath_now = os.path.abspath(os.path.join(os.getcwd(),'..'))
+        self.filepath_now = os.path.abspath(os.path.join(os.getcwd()))
         self.filepath_config = self.filepath_now + '\config\config.xlsx'
         # print(self.filepath_config)
         self.config_sheetname = 'urlconfig'

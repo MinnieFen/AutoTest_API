@@ -8,7 +8,7 @@ import os
 
 class Testgetcominfo(unittest.TestCase):
     def setUp(self):
-        self.filepath_now = os.path.abspath(os.path.join(os.getcwd(),'..'))
+        self.filepath_now = os.path.abspath(os.path.join(os.getcwd()))
         self.filepath_config = self.filepath_now + '\config\config.xlsx'
         self.config_sheetname = 'urlconfig'
         self.config_data = Excel_data(self.filepath_config, self.config_sheetname).get_excel_data()
