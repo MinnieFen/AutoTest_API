@@ -51,9 +51,9 @@ def send_email(new_file):
     msg['Subject'] = u'自动定时发送测试报告'
     msg['From'] = '517110453@qq.com'
     msg['To'] = '437889925@qq.com'
-    smtp = smtplib.SMTP(mail_host,25)
+    smtp = smtplib.SMTP(mail_host,25)     #创建SMTP对象
     smtp.login(mail_user,mail_pass)
-    smtp.sendmail(sender,receiver,msg.as_string())
+    smtp.sendmail(sender,receiver,msg.as_string())    #SMTP对象使用sendmail方法发送邮件
     smtp.quit()
     # print('test report email has send out !')
     # try:
