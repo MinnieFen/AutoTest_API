@@ -22,8 +22,8 @@ class TestLogin(unittest.TestCase):
         self.params = ReadExcel(self.datapath_login,self.login_sheetname).read_excel_data()
 
     def tearDown(self):
-        print('test login done!')
-
+        # print('test login done!')
+        pass
     def test_login_01(self):
         '''登录成功'''
         paramsdata1 = self.params[0]
@@ -31,6 +31,7 @@ class TestLogin(unittest.TestCase):
         req_result = r.apimethod()
         # print(req_result)
         self.assertEqual(req_result['error'],'0')
+        print('//////////')
         # print(req_result['data']['scode'])
         '''获取scode并存储scode值'''
         yamlpath = self.filepath_now + '\config\scode.yaml'
@@ -48,6 +49,7 @@ class TestLogin(unittest.TestCase):
 
 # if __name__ == '__main__':
 #     suite = unittest.TestSuite()
+#     suite.addTest(TestLogin('test_login_02'))
 #     suite.addTest(TestLogin("test_login_01"))
 #     unittest.TextTestRunner().run(suite)
 

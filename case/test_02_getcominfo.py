@@ -25,7 +25,7 @@ class Testgetcominfo(unittest.TestCase):
         print('test done!')
 
     def test_getcominfo_01(self):
-        '''获取公司信息'''
+        '''获取公司信息成功'''
         paramsdata = self.params[0]
         # print(paramsdata)
         # paramsdata = paramsdata0.update({'scode':get_scode()})
