@@ -7,6 +7,7 @@ import time
 from HTMLTestRunner import HTMLTestRunner
 import smtplib
 from email.mime.text import MIMEText
+from config import reademail
 from email.header import Header
 
 cur_path = os.path.dirname(os.path.realpath(__file__))   #获取脚本的真实路径
@@ -37,21 +38,21 @@ def get_report_file(report_path):
     # 找到最新生成的报告文件
     report_file = os.path.join(report_path,lists[-1])
     return report_file
-def send_email(new_file):
+def send_email(mail_host,mail_pass,mail_user,sender,receiver,new_file):
     '''第四步：发送邮件'''
     f = open(new_file,'rb')
     mail_body = f.read()
     f.close()
-    mail_host = "smtp.qq.com"
-    mail_user = '517110453@qq.com'
-    mail_pass = 'swtpziuailjucafi'
-    sender = '517110453@qq.com'
-    receiver = '437889925@qq.com'
+    # mail_host = "smtp.qq.com"
+    # mail_user = '517110453@qq.com'
+    # mail_pass = 'swtpziuailjucafi'
+    # sender = '517110453@qq.com'
+    # receiver = '437889925@qq.com,chenmingfen@yunxitech.cn'
     msg = MIMEText(mail_body,'html','utf-8')
     msg['Subject'] = u'自动定时发送测试报告'
     msg['From'] = '517110453@qq.com'
     msg['To'] = '437889925@qq.com'
-    smtp = smtplib.SMTP(mail_host,25)     #创建SMTP对象
+    smtp = smtplib.SMTP(mail_host,25)     # 创建SMTP对象
     smtp.login(mail_user,mail_pass)
     smtp.sendmail(sender,receiver,msg.as_string())    #SMTP对象使用sendmail方法发送邮件
     smtp.quit()
@@ -96,11 +97,21 @@ def send_email(new_file):
     # print('test report email has send out !')
 
 if __name__ == '__main__':
+    # 加载用例
     all_case = add_case()
+    #执行用例，生成测试报告的路径
     run_case(all_case)
+#获取最新的测试报告
     report_path = os.path.join(cur_path,'report')
     report_file = get_report_file(report_path)
-    send_email(report_file)
+    # send_email(report_file)
+    #邮箱配置
+    mail_host = reademail.mail_host
+    mail_pass = reademail.mail_pass
+    mail_user = reademail.mail_user
+    sender = reademail.sender
+    receiver = reademail.receiver
+    send_email(mail_host,mail_pass,mail_user,sender,receiver,report_file)
 
 # 方法2：构造测试集，将用例添加到测试套件中
 # def add_case():
