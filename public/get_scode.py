@@ -17,5 +17,5 @@ def get_scode(yamlName = "scode.yaml"):
     # print(t["scode"])
     return t["scode"]
 
-if __name__ == '__main__':
-    get_scode()
+# if __name__ == '__main__':
+#     get_scode()

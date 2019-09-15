@@ -11,6 +11,9 @@ class Excel_data(object):
         self.rowNum = self.table.nrows
         self.colNum = self.table.ncols
 
+    def get_line(self):
+        return self.table.nrows
+
     def get_excel_data(self):
         fileinfo = []
         for i in range(1,self.rowNum):
@@ -19,16 +22,18 @@ class Excel_data(object):
                 data = self.table.cell_value(i,j)
                 excel_dict[self.keys[j]] = data
             fileinfo.append(excel_dict)
-        # print(fileinfo)
+        print(fileinfo)
         return fileinfo
 
         # print(fileinfo[0]['host'])
-# if __name__ == '__main__':
-#     filepath_now = os.path.abspath(os.path.join(os.getcwd(), '..'))
-#     excelpath = filepath_now +'/config/config.xlsx'
-#     sheetname = 'urlconfig'
-#     get_data = Excel_data(excelpath,sheetname)
-#     datas = get_data.get_excel_data()
+if __name__ == '__main__':
+    filepath_now = os.path.abspath(os.path.join(os.getcwd(), '..'))
+    excelpath = filepath_now +'/config/config.xlsx'
+    sheetname = 'urlconfig'
+    get_data = Excel_data(excelpath,sheetname)
+    datas = get_data.get_excel_data()
+    nrow = Excel_data.get_line()
+    print(nrow)
 
 
 # class Excel_data(object):
