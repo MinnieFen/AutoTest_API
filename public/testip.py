@@ -43,10 +43,11 @@ class TestIP(unittest.TestCase):
         ipAddr = 'sd.we.ww.ere'
         result = GetIP(ipAddr)
         self.assertEqual(result, False)
+
 def GetIP(ipAddr):
     arry = ipAddr.split('.')
     arry_len = len(arry)
-    flag = None
+    flag = True
     if arry_len != 4:
         flag = False
     else:
@@ -54,8 +55,8 @@ def GetIP(ipAddr):
             try:
                 arry_i = int(arry_i)
                 if  arry_i >= 0 and arry_i <= 255:
-                    flag = True
-
+                    pass
+                    # flag = True
                 else:
                     flag = False
             except:
@@ -67,17 +68,18 @@ if __name__ == '__main__':
     result = GetIP(str_ip)
     print(result)
 
-    # case_path = os.path.abspath(os.getcwd())
-    # discover = unittest.defaultTestLoader.discover(case_path, pattern='test*.py', top_level_dir=None)
+    case_path = os.path.abspath(os.getcwd())
+    # print(case_path)
+    discover = unittest.defaultTestLoader.discover(case_path, pattern='test*.py', top_level_dir=None)
+    runner = unittest.TextTestRunner()
+    runner.run(discover)
     # suite = unittest.TestSuite()
-    # suite.addTest(discover)
-    suite = unittest.TestSuite()
-    suite.addTest(TestIP("test_case1"))
-    suite.addTest(TestIP("test_case2"))
-    suite.addTest(TestIP("test_case3"))
-    suite.addTest(TestIP("test_case4"))
-    suite.addTest(TestIP("test_case5"))
-    suite.addTest(TestIP("test_case6"))
-    suite.addTest(TestIP("test_case7"))
-    suite.addTest(TestIP("test_case8"))
-    unittest.TextTestRunner().run(suite)
+    # suite.addTest(TestIP("test_case1"))
+    # suite.addTest(TestIP("test_case2"))
+    # suite.addTest(TestIP("test_case3"))
+    # suite.addTest(TestIP("test_case4"))
+    # suite.addTest(TestIP("test_case5"))
+    # suite.addTest(TestIP("test_case6"))
+    # suite.addTest(TestIP("test_case7"))
+    # suite.addTest(TestIP("test_case8"))
+    # unittest.TextTestRunner().run(suite)
