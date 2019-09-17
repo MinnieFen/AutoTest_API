@@ -55,8 +55,7 @@ def GetIP(ipAddr):
             try:
                 arry_i = int(arry_i)
                 if  arry_i >= 0 and arry_i <= 255:
-                    pass
-                    # flag = True
+                    continue
                 else:
                     flag = False
             except:
@@ -64,22 +63,10 @@ def GetIP(ipAddr):
     return flag
 
 if __name__ == '__main__':
-    str_ip = input('pls input ipAddr：')
+    str_ip = input('pls input str：')
     result = GetIP(str_ip)
     print(result)
-
     case_path = os.path.abspath(os.getcwd())
-    # print(case_path)
     discover = unittest.defaultTestLoader.discover(case_path, pattern='test*.py', top_level_dir=None)
     runner = unittest.TextTestRunner()
     runner.run(discover)
-    # suite = unittest.TestSuite()
-    # suite.addTest(TestIP("test_case1"))
-    # suite.addTest(TestIP("test_case2"))
-    # suite.addTest(TestIP("test_case3"))
-    # suite.addTest(TestIP("test_case4"))
-    # suite.addTest(TestIP("test_case5"))
-    # suite.addTest(TestIP("test_case6"))
-    # suite.addTest(TestIP("test_case7"))
-    # suite.addTest(TestIP("test_case8"))
-    # unittest.TextTestRunner().run(suite)
