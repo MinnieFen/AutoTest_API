@@ -110,7 +110,7 @@ if __name__ == '__main__':
     mail_pass = reademail.mail_pass
     mail_user = reademail.mail_user
     sender = reademail.sender
-    receiver = reademail.receiver
+    receiver = reademail.receivers
     send_email(mail_host,mail_pass,mail_user,sender,receiver,report_file)
 
 # 方法2：构造测试集，将用例添加到测试套件中

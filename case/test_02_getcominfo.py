@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
-from public.get_config import Excel_data
-from public.get_testdata import ReadExcel
+from public.get_exceldata import Excel_data
+# from public.get_testdata import ReadExcel
 from public.get_scode import get_scode
 from public.apimethod import Apimethod
 import unittest
@@ -19,7 +19,7 @@ class Testgetcominfo(unittest.TestCase):
         self.method = self.config_data[1]['method']
         self.datapath_getcominfo = self.filepath_now + '\config\data_params.xlsx'
         self.cominfo_sheetname = 'cominfodata'
-        self.params = ReadExcel(self.datapath_getcominfo, self.cominfo_sheetname).read_excel_data()
+        self.params = Excel_data(self.datapath_getcominfo, self.cominfo_sheetname).get_excel_data()
 
     def tearDown(self):
         print('test done!')
