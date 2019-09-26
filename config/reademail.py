@@ -14,5 +14,5 @@ mail_pass = conf.get('email','mail_pass')
 mail_user = conf.get('email','mail_user')
 sender = conf.get('email','sender')
 receivers = conf.get('email','receiver')
-print(receivers)
+
 

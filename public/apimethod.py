@@ -10,7 +10,7 @@ class Apimethod(object):
 
     def apimethod(self):
         if self.method == 'post':
-            r = requests.post(url = self.url,json = self.data)
+            r = requests.post(url = self.url,json=self.data)
             res = json.loads(r.text)
             print('     请求响应状态：%s' %r.status_code)
             return res

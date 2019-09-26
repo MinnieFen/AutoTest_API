@@ -5,15 +5,13 @@ from public.apimethod import Apimethod
 import unittest
 from ruamel import yaml
 import os
-import ddt
 
 
-@ddt.ddt
 class TestLogin(unittest.TestCase):
     '''登录测试'''
     def setUp(self):
-        self.filepath_now = os.path.abspath(os.path.join(os.getcwd(),'..'))   # 获取上一级路径，单独运行用例时用
-        # self.filepath_now = os.path.abspath(os.path.join(os.getcwd()))     #获取当前路径，运行main时用
+        # self.filepath_now = os.path.abspath(os.path.join(os.getcwd(),'..'))   # 获取上一级路径，单独运行用例时用
+        self.filepath_now = os.path.abspath(os.path.join(os.getcwd()))     #获取当前路径，运行main时用
         self.filepath_config = self.filepath_now + '\config\config.xlsx'
         # print(self.filepath_config)
         self.config_sheetname = 'urlconfig'
@@ -22,46 +20,41 @@ class TestLogin(unittest.TestCase):
         self.method = self.config_data[0]['method']
         self.datapath_login = self.filepath_now + '\config\data_params.xlsx'
         self.login_sheetname = 'logindata'
-        self.testdata = Excel_data(self.datapath_login,self.login_sheetname).get_excel_data()
+        self.params = Excel_data(self.datapath_login,self.login_sheetname).get_excel_data()
 
 
     def tearDown(self):
         # print('test login done!')
         pass
-    # def test_login_01(self):
-    #     '''登录成功'''
-    #     paramsdata1 = self.params[0]
-    #     r = Apimethod(self.url,self.method,paramsdata1)
-    #     req_result = r.apimethod()
-    #     # print(req_result)
-    #     self.assertEqual(req_result['error'],'0')
-    #     print('//////////')
-    #     # print(req_result['data']['scode'])
-    #     '''获取scode并存储scode值'''
-    #     yamlpath = self.filepath_now + '\config\scode.yaml'
-    #     scodevalue = {'scode':req_result['data']['scode']}
-    #     with open(yamlpath,'w',encoding="utf-8") as f:
-    #         yaml.dump(scodevalue,f,Dumper=yaml.RoundTripDumper)
-    #
-    # def test_login_02(self):
-    #     '''登录失败'''
-    #     paramsdata2 = self.params[1]
-    #     r = Apimethod(self.url,self.method,paramsdata2)
-    #     req_result = r.apimethod()
-    #     self.assertEqual(req_result['error'],'PARAM_003')
-    #     # print(req_result)
+    def test_login_01(self):
+        '''登录成功'''
+        paramsdata1 = self.params[0]
+        r = Apimethod(self.url,self.method,paramsdata1)
+        req_result = r.apimethod()
+        # print(req_result)
+        self.assertEqual(req_result['error'],'0')
+        print('//////////')
+        # print(req_result['data']['scode'])
+        '''获取scode并存储scode值'''
+        yamlpath = self.filepath_now + '\config\scode.yaml'
+        scodevalue = {'scode':req_result['data']['scode']}
+        with open(yamlpath,'w',encoding="utf-8") as f:
+            yaml.dump(scodevalue,f,Dumper=yaml.RoundTripDumper)
+
+    def test_login_02(self):
+        '''登录失败'''
+        paramsdata2 = self.params[1]
+        r = Apimethod(self.url,self.method,paramsdata2)
+        req_result = r.apimethod()
+        self.assertEqual(req_result['error'],'PARAM_003')
+        # print(req_result)
 
 # if __name__ == '__main__':
 #     suite = unittest.TestSuite()
 #     suite.addTest(TestLogin('test_login_02'))
 #     suite.addTest(TestLogin("test_login_01"))
 #     unittest.TextTestRunner().run(suite)
-    @ddt.data(*testdata)
-    def test_login_api(self,data):
-        re = Apimethod(self.url,self.method,data)
-        self.assertEqual(re['error'],'0')
-if __name__ == '__main__':
-    unittest.main()
+
 
 
 
