@@ -7,7 +7,7 @@ import time
 from HTMLTestRunner import HTMLTestRunner
 import smtplib
 from email.mime.text import MIMEText
-from config import reademail
+from config import readconfig
 from email.header import Header
 
 cur_path = os.path.dirname(os.path.realpath(__file__))   #获取脚本的真实路径
@@ -106,11 +106,11 @@ if __name__ == '__main__':
     report_file = get_report_file(report_path)
     # send_email(report_file)
     #邮箱配置
-    mail_host = reademail.mail_host
-    mail_pass = reademail.mail_pass
-    mail_user = reademail.mail_user
-    sender = reademail.sender
-    receiver = reademail.receiver
+    mail_host = readconfig.mail_host
+    mail_pass = readconfig.mail_pass
+    mail_user = readconfig.mail_user
+    sender = readconfig.sender
+    receiver = readconfig.receiver
     send_email(mail_host,mail_pass,mail_user,sender,receiver,report_file)
 
 # 方法2：构造测试集，将用例添加到测试套件中

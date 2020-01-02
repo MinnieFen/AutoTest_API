@@ -6,10 +6,20 @@ cfg_path = os.path.join(cur_path,'email.ini')
 
 conf = configparser.ConfigParser()
 conf.read(cfg_path)
+
+# 读取邮箱配置
 mail_host = conf.get('email','mail_host')
 mail_pass = conf.get('email','mail_pass')
 mail_user = conf.get('email','mail_user')
 sender = conf.get('email','sender')
 receiver = conf.get('email','receivers')
-print(receiver)
+
+# 读取服务器配置
+sql_host = conf.get('sql_info','host')
+sql_uer = conf.get('sql_info','user')
+sql_port = conf.get('sql_info','port')
+sql_password = conf.get('sql_info','password')
+sql_db_yx = conf.get('sql_info','db_yx')
+sql_db_qiyuebao = conf.get('sql_info','db_qiyuebao')
+sql_charset = conf.get('sql_info','charset')
 
