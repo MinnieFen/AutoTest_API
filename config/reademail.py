@@ -6,11 +6,10 @@ cfg_path = os.path.join(cur_path,'email.ini')
 
 conf = configparser.ConfigParser()
 conf.read(cfg_path)
-
 mail_host = conf.get('email','mail_host')
 mail_pass = conf.get('email','mail_pass')
 mail_user = conf.get('email','mail_user')
 sender = conf.get('email','sender')
-receiver = conf.get('email','receiver')
+receiver = conf.get('email','receivers')
 print(receiver)
 

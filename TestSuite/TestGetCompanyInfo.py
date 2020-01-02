@@ -1,8 +1,7 @@
 # -*- coding:utf-8 -*-
-from public.get_config import Excel_data
-from public.get_testdata import ReadExcel
-from public.get_scode import get_scode
-from public.apimethod import Apimethod
+from public.ReadExcel import ReadExcel
+from public.GetLoginScode import GetScode
+from public.Apimethod import Apimethod
 import unittest
 import os
 
@@ -13,7 +12,7 @@ class Testgetcominfo(unittest.TestCase):
         self.filepath_now = os.path.abspath(os.path.join(os.getcwd()))   #获取当前路径，运行main时用
         self.filepath_config = self.filepath_now + '\config\config.xlsx'
         self.config_sheetname = 'urlconfig'
-        self.config_data = Excel_data(self.filepath_config, self.config_sheetname).get_excel_data()
+        self.config_data = ReadExcel(self.filepath_config, self.config_sheetname).read_excel_data()
         self.url = self.config_data[1]['host'] + self.config_data[1]['url']
         # print(self.url)
         self.method = self.config_data[1]['method']
@@ -26,10 +25,11 @@ class Testgetcominfo(unittest.TestCase):
 
     def test_getcominfo_01(self):
         '''获取公司信息成功'''
+        getscode = GetScode()
         paramsdata = self.params[0]
         # print(paramsdata)
         # paramsdata = paramsdata0.update({'scode':get_scode()})
-        paramsdata['scode'] = get_scode()     # 将scode添加到字典参数中
+        paramsdata['scode'] = getscode.save_scode()     # 将scode添加到字典参数中
         # print(paramsdata)
         r = Apimethod(self.url, self.method, paramsdata)
         req_result = r.apimethod()

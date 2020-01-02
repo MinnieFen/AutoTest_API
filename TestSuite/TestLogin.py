@@ -1,26 +1,17 @@
 # -*- coding:utf-8 -*-
-from public.get_config import Excel_data
-from public.apimethod import Apimethod
-from public.get_testdata import ReadExcel
+from public.Apimethod import Apimethod
+from public.GetExcelData import get_excel_data
 import unittest
-from ruamel import yaml
-import os
 
 class TestLogin(unittest.TestCase):
     '''登录测试'''
     def setUp(self):
-        # self.filepath_now = os.path.abspath(os.path.join(os.getcwd(),'..'))   # 获取上一级路径，单独运行用例时用
-        self.filepath_now = os.path.abspath(os.path.join(os.getcwd()))     #获取当前路径，运行main时用
-        self.filepath_config = self.filepath_now + '\config\config.xlsx'
-        # print(self.filepath_config)
         self.config_sheetname = 'urlconfig'
-        self.config_data = Excel_data(self.filepath_config,self.config_sheetname).get_excel_data()
+        self.config_data = get_excel_data(self.config_sheetname)
         self.url = self.config_data[0]['host'] + self.config_data[0]['url']
         self.method = self.config_data[0]['method']
-        self.datapath_login = self.filepath_now + '\config\data_params.xlsx'
         self.login_sheetname = 'logindata'
-        self.params = ReadExcel(self.datapath_login,self.login_sheetname).read_excel_data()
-
+        self.params = get_excel_data(self.login_sheetname)
     def tearDown(self):
         # print('test login done!')
         pass
@@ -29,29 +20,18 @@ class TestLogin(unittest.TestCase):
         paramsdata1 = self.params[0]
         r = Apimethod(self.url,self.method,paramsdata1)
         req_result = r.apimethod()
-        # print(req_result)
         self.assertEqual(req_result['error'],'0')
-        print('//////////')
-        # print(req_result['data']['scode'])
-        '''获取scode并存储scode值'''
-        yamlpath = self.filepath_now + '\config\scode.yaml'
-        scodevalue = {'scode':req_result['data']['scode']}
-        with open(yamlpath,'w',encoding="utf-8") as f:
-            yaml.dump(scodevalue,f,Dumper=yaml.RoundTripDumper)
-
     def test_login_02(self):
         '''登录失败'''
         paramsdata2 = self.params[1]
         r = Apimethod(self.url,self.method,paramsdata2)
         req_result = r.apimethod()
         self.assertEqual(req_result['error'],'PARAM_003')
-        # print(req_result)
-
 # if __name__ == '__main__':
 #     suite = unittest.TestSuite()
-#     suite.addTest(TestLogin('test_login_02'))
-#     suite.addTest(TestLogin("test_login_01"))
-#     unittest.TextTestRunner().run(suite)
+    # suite.addTest(TestLogin('test_login_02'))
+    # suite.addTest(TestLogin("test_login_01"))
+    # unittest.TextTestRunner().run(suite)
 
 
 
@@ -63,7 +43,7 @@ class TestLogin(unittest.TestCase):
 #     print(config_data)
 #     # print(url)
 #     method = config_data[0]['method']
-#     datapath_login = 'D:/appinstall/python3/test1/testdata/data_pwdlogin.xlsx'
+#     datapath_login = 'D:/appinstall/python3/test1/TestData/data_pwdlogin.xlsx'
 #     login_sheetname = 'logindata'
 #     params = ReadExcel(datapath_login,login_sheetname).readexceldata()
 #

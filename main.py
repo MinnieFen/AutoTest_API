@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 import unittest
 import os
-from case.test_01_login import TestLogin
-from case.test_02_getcominfo import Testgetcominfo
+from TestSuite.TestLogin import TestLogin
+from TestSuite.TestGetCompanyInfo import Testgetcominfo
 import time
 from HTMLTestRunner import HTMLTestRunner
 import smtplib
@@ -11,7 +11,7 @@ from config import reademail
 from email.header import Header
 
 cur_path = os.path.dirname(os.path.realpath(__file__))   #获取脚本的真实路径
-def add_case(caseName = 'case',rule = 'test*.py'):
+def add_case(caseName = 'TestSuite',rule = 'test*.py'):
     '''第一步：加载所有测试用例'''
     case_path = os.path.join(cur_path,caseName)
     # 定义discover方法的参数
@@ -129,7 +129,7 @@ if __name__ == '__main__':
 # cur_path = os.path.dirname(os.path.realpath(__file__))
 # now = time.strftime("%Y_%m_%d_%H_%M_%S")
 # def add_case():
-#     case_path = cur_path + '\case'
+#     case_path = cur_path + '\TestSuite'
 #     discover = unittest.defaultTestLoader.discover(case_path,pattern='test*.py',top_level_dir=None)  #discover()方法可自动根据路径匹配查找测试用例文件（test*.py），并将查找到的测试用例组装到测试套件
 #     # suite = unittest.TestSuite()
 #     # suite.addTest(discover)
