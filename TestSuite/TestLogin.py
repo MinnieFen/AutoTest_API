@@ -6,25 +6,21 @@ import unittest
 class TestLogin(unittest.TestCase):
     '''登录测试'''
     def setUp(self):
-        self.config_sheetname = 'urlconfig'
-        self.config_data = get_excel_data(self.config_sheetname)
+        self.config_data = get_excel_data('urlconfig')
         self.url = self.config_data[0]['host'] + self.config_data[0]['url']
         self.method = self.config_data[0]['method']
-        self.login_sheetname = 'logindata'
-        self.params = get_excel_data(self.login_sheetname)
+        self.params = get_excel_data('logindata')
     def tearDown(self):
         # print('test login done!')
         pass
     def test_login_01(self):
         '''登录成功'''
-        paramsdata1 = self.params[0]
-        r = Apimethod(self.url,self.method,paramsdata1)
+        r = Apimethod(self.url,self.method,self.params[0])
         req_result = r.apimethod()
         self.assertEqual(req_result['error'],'0')
     def test_login_02(self):
         '''登录失败'''
-        paramsdata2 = self.params[1]
-        r = Apimethod(self.url,self.method,paramsdata2)
+        r = Apimethod(self.url,self.method,self.params[1])
         req_result = r.apimethod()
         self.assertEqual(req_result['error'],'PARAM_003')
 # if __name__ == '__main__':
